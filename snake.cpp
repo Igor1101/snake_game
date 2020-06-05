@@ -26,10 +26,10 @@ int snake::step()
     case eSTOP:
         return 0;
     case eUP:
-        y++;
+        y--;
         break;
     case eDOWN:
-        y--;
+        y++;
         break;
     case eRIGHT:
         x++;
@@ -54,6 +54,7 @@ void snake::input(int ch)
             dir = eUP;
             break;
         }
+        break;
     case 's':
         switch (dir) {
         case eUP:
@@ -63,6 +64,7 @@ void snake::input(int ch)
             dir = eRIGHT;
             break;
         }
+        break;
     case 'z':
         switch (dir) {
         case eDOWN:
@@ -72,6 +74,7 @@ void snake::input(int ch)
             dir = eDOWN;
             break;
         }
+        break;
     case 'a':
         switch (dir) {
         case eUP:
@@ -81,6 +84,7 @@ void snake::input(int ch)
             dir = eLEFT;
             break;
         }
+        break;
 
     }
 }
