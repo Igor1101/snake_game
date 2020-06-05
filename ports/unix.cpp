@@ -5,6 +5,7 @@
 #include <ncurses.h>
 #include "../snake_conf.h"
 #include <iostream>
+#include <cstdlib>
 #include "../snake.h"
 
 using namespace std;
@@ -57,7 +58,7 @@ void port_display(int width, int height, snake* s)
         for(int j=0; j<width; j++) {
             if(j==0 || j == width - 1)
                 cout << "#";
-            else if(s->params().x == j && s->params().y == i)
+            else if(s->coord_is_me(j, i))
                 cout << "0";
             else
                 cout << " ";
@@ -68,4 +69,17 @@ void port_display(int width, int height, snake* s)
         cout << "#";
     }
     cout << "\r\n";
+}
+
+void* port_malloc(size_t sz)
+{
+    return malloc(sz);
+}
+void* port_realloc(void*addr, size_t sz)
+{
+    return realloc(addr, sz);
+}
+void port_free(void*addr)
+{
+    free(addr);
 }

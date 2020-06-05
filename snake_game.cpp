@@ -4,7 +4,7 @@
 snake_game::snake_game()
 {
     port_display_init();
-    snake_main = snake(width/2, height/2, 2);
+    snake_main = snake(width/2, height/2, 10);
 }
 
 snake_game::~snake_game()

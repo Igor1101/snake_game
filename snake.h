@@ -1,6 +1,6 @@
 #ifndef SNAKE_H
 #define SNAKE_H
-
+#include <cstddef>
 enum edirection {
     eSTOP, eLEFT, eRIGHT, eUP, eDOWN
 };
@@ -19,7 +19,12 @@ private:
     int x, y;
     int tail;
     enum edirection dir;
+    struct s_tail_part* tail_arr = NULL;
+    int tail_realloc(int tparts);
+    int tail_malloc(int tparts);
+    int tail_step();
 public:
+    static constexpr int tail_defsize = 10;
     snake(int x, int y, int tail);
     snake();
     ~snake();
@@ -33,6 +38,8 @@ public:
         return p;
     }
     void input(int ch);
+    bool coord_is_me(int x, int y);
+    void tail_init();
 };
 
 #endif // SNAKE_H
