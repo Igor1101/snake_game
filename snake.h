@@ -9,6 +9,10 @@ struct snake_params {
     int x, y, tail;
 };
 
+struct s_tail_part {
+    int x, y;
+};
+
 class snake
 {
 private:
