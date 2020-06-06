@@ -1,6 +1,6 @@
 #include "snake.h"
 #include "ports/def.h"
-
+#include "food.h"
 snake::snake(int x, int y, int tail)
 {
     dir = eSTOP;
@@ -34,7 +34,7 @@ snake::~snake()
     port_free(tail_arr);
 }
 
-int snake::step()
+int snake::step(food* f, int food_times)
 {
     tail_step();
     switch (dir) {
@@ -52,6 +52,14 @@ int snake::step()
     case eLEFT:
         x--;
         break;
+    }
+    // now eat if found something
+    for(int i=0; i<food_times; i++) {
+        if(f[i].coord_is(x,y)) {
+            int energy = f[i].eat();
+            tail_inc(energy);
+            return energy;
+        }
     }
     return 0;
 }
@@ -176,4 +184,14 @@ void snake::tail_init()
         tail_arr[i+1].x = tail_arr[i].x-1;
         tail_arr[i+1].y = tail_arr[i].y;
     }
+}
+
+int snake::tail_inc(int energy)
+{
+    int stat = tail_realloc(tail+energy);
+    if(stat < 0) {
+        return -1;
+    }
+    tail = tail+energy;
+    return stat;
 }

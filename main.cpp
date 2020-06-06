@@ -10,6 +10,10 @@ int main()
         game.input();
         game.step();
         game.draw();
+        if(game.shutdown()) {
+            game.~snake_game();
+            return 0;
+        }
     }
     game.draw();
     return 0;

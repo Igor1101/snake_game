@@ -1,6 +1,7 @@
 #ifndef SNAKE_H
 #define SNAKE_H
 #include <cstddef>
+#include "food.h"
 enum edirection {
     eSTOP, eLEFT, eRIGHT, eUP, eDOWN
 };
@@ -23,12 +24,13 @@ private:
     int tail_realloc(int tparts);
     int tail_malloc(int tparts);
     int tail_step();
+    int tail_inc(int energy);
 public:
     static constexpr int tail_defsize = 10;
     snake(int x, int y, int tail);
     snake();
     ~snake();
-    int step();
+    int step(food* f, int food_times);
     struct snake_params params()
     {
         struct snake_params p;
