@@ -20,8 +20,8 @@ enum eRegionType{
 class snake_game
 {
 private:
-    int width = 20;
-    int height = 20;
+    int width = 50;
+    int height = 50;
     snake snake_main;
 public:
     snake_game();

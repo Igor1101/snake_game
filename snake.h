@@ -38,7 +38,8 @@ public:
         return p;
     }
     void input(int ch);
-    bool coord_is_me(int x, int y);
+    bool coord_is_head(int x, int y);
+    bool coord_is_tail(int x, int y);
     void tail_init();
 };
 

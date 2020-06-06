@@ -150,15 +150,20 @@ int snake::tail_malloc(int tparts)
     return 0;
 }
 
-bool snake::coord_is_me(int x, int y)
+bool snake::coord_is_tail(int x, int y)
 {
-    if((x == this->x) && (y == this->y)) {
-        return true;
-    }
     for(int i=0; i<tail; i++) {
         if(tail_arr[i].x == x && tail_arr[i].y == y) {
             return true;
         }
+    }
+    return false;
+}
+
+bool snake::coord_is_head(int x, int y)
+{
+    if((x == this->x) && (y == this->y)) {
+        return true;
     }
     return false;
 }

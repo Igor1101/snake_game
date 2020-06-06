@@ -58,8 +58,10 @@ void port_display(int width, int height, snake* s)
         for(int j=0; j<width; j++) {
             if(j==0 || j == width - 1)
                 cout << "#";
-            else if(s->coord_is_me(j, i))
+            else if(s->coord_is_head(j, i))
                 cout << "0";
+            else if(s->coord_is_tail(j, i))
+                cout << "*";
             else
                 cout << " ";
         }
