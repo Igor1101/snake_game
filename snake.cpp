@@ -1,6 +1,7 @@
 #include "snake.h"
 #include "ports/def.h"
 #include "food.h"
+#include "maze.h"
 snake::snake(int x, int y, int tail)
 {
     dir = eSTOP;
@@ -34,8 +35,16 @@ snake::~snake()
     port_free(tail_arr);
 }
 
-int snake::step(food* f, int food_times)
+int snake::step(food* f, maze* m, int food_times)
 {
+    if(state != ALIVE) {
+        static int dead_time = 0;
+        dead_time ++;
+        if(dead_time > 100) {
+            return -1;
+        }
+        return 0;
+    }
     tail_step();
     switch (dir) {
     case eSTOP:
@@ -60,6 +69,11 @@ int snake::step(food* f, int food_times)
             tail_inc(energy);
             return energy;
         }
+    }
+    // now verify maze
+    if(m->get(0)[x][y] != ' ') {
+        // snake dead :(
+        state = DEAD;
     }
     return 0;
 }

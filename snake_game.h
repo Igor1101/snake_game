@@ -4,6 +4,7 @@
 #include "ports/def.h"
 #include "snake.h"
 #include "food.h"
+#include "maze.h"
 
 enum eRegionType{
     eEmpty,
@@ -17,14 +18,14 @@ enum eRegionType{
     eSnake5,
     eSnake6
 };
+
 class snake_game
 {
 private:
-    int width = 100;
-    int height = 10;
     snake snake_main;
     food food0;
     bool over = false;
+    maze maze0;
 public:
     snake_game();
     ~snake_game();

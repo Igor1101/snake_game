@@ -11,10 +11,9 @@ int main()
         game.step();
         game.draw();
         if(game.shutdown()) {
-            game.~snake_game();
-            return 0;
+            break;
         }
     }
-    game.draw();
+    port_print("game is over");
     return 0;
 }

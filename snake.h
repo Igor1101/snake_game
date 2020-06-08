@@ -2,6 +2,7 @@
 #define SNAKE_H
 #include <cstddef>
 #include "food.h"
+#include "maze.h"
 enum edirection {
     eSTOP, eLEFT, eRIGHT, eUP, eDOWN
 };
@@ -14,12 +15,18 @@ struct s_tail_part {
     int x, y;
 };
 
+enum snake_state {
+    ALIVE,
+    DEAD
+};
+
 class snake
 {
 private:
     int x, y;
     int tail;
     enum edirection dir;
+    enum snake_state state = ALIVE;
     struct s_tail_part* tail_arr = NULL;
     int tail_realloc(int tparts);
     int tail_malloc(int tparts);
@@ -30,7 +37,7 @@ public:
     snake(int x, int y, int tail);
     snake();
     ~snake();
-    int step(food* f, int food_times);
+    int step(food* f, maze* m, int food_times);
     struct snake_params params()
     {
         struct snake_params p;

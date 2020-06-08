@@ -6,6 +6,7 @@
 #include "../snake_conf.h"
 #include <iostream>
 #include <cstdlib>
+#include <unistd.h>
 #include "../snake.h"
 
 using namespace std;
@@ -78,7 +79,7 @@ static bool is_food(food* f, int food_amount, int x, int y)
     return false;
 }
 
-void port_display(int width, int height, snake* snakes, int snakes_amount,
+void port_display(const char** maze, int width, int height, snake* snakes, int snakes_amount,
                   food* f, int food_amount)
 {
     system("clear");
@@ -90,7 +91,9 @@ void port_display(int width, int height, snake* snakes, int snakes_amount,
         for(int x=0; x<width; x++) {
             //if(x==0 || x == width - 1)
             //    cout << "#";
-            if(is_food(f, food_amount, x, y))
+            if(maze[x][y] != ' ')
+                cout << "#";
+            else if(is_food(f, food_amount, x, y))
                 cout << "F";
             else if(is_head(snakes, snakes_amount, x, y))
                 cout << "0";
@@ -132,4 +135,9 @@ int port_rand(int from, int to)
 void port_exit(void)
 {
     exit(0);
+}
+
+void port_sleep_sec(int s)
+{
+    sleep(s);
 }
